@@ -1,7 +1,7 @@
 // abstract factory
 interface CommercialFactory {
   createOrder(id: number): Order;
-  createPayment(): Payment
+  createPayment(): Payment;
 }
 
 // abstract product1
@@ -13,7 +13,7 @@ interface Order {
 
 // abstract product2
 interface Payment {
-  savePayment(order: Order, amount: number): void
+  savePayment(order: Order, amount: number): void;
 }
 
 // concrete product1
@@ -47,14 +47,18 @@ class PersonalOrder implements Order {
 // concrete product2
 class OnlinePayment implements Payment {
   savePayment(order: Order, amount: number): void {
-      console.log(`>>> payed online ${amount} social credits for order with id ${order.id}`)
+    console.log(
+      `>>> payed online ${amount} social credits for order with id ${order.id}`
+    );
   }
 }
 
 // concrete product2
 class CashPayment implements Payment {
   savePayment(order: Order, amount: number): void {
-      console.log(`>>> gave physically ${amount} social credits for order with id ${order.id}`)
+    console.log(
+      `>>> gave physically ${amount} social credits for order with id ${order.id}`
+    );
   }
 }
 
@@ -64,7 +68,7 @@ class CoffeeShop implements CommercialFactory {
     return new PersonalOrder(id);
   }
   createPayment(): Payment {
-     return new CashPayment()
+    return new CashPayment();
   }
 }
 
@@ -74,14 +78,14 @@ class Marketpalce implements CommercialFactory {
     return new OnlineOrder(id);
   }
   createPayment() {
-    return new OnlinePayment()
+    return new OnlinePayment();
   }
 }
 
 function orderer(factory: CommercialFactory) {
   const order = factory.createOrder(performance.now());
   const payment = factory.createPayment();
-  payment.savePayment(order, performance.now())
+  payment.savePayment(order, performance.now());
   order.updateStorage();
   order.shipTo("somewehere in ther world");
 }
