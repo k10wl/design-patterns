@@ -1,3 +1,3 @@
 module chain-of-responsibility
 
-go 1.21.2
+go 1.22.2
